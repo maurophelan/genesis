@@ -1,2 +1,2 @@
 # genesis
-Random staff I should know
+Random stuff I should know
