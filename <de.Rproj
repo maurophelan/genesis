@@ -1,0 +1,43 @@
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("readr") 
+
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+
+
+
+`vdem_data` <- readRDS("~/Documents/V-Dem-CY-Full+Others-v14.rds")
+
+vdem_filtered <- vdem_data %>%
+    filter(country_name %in% c("Chile", "Costa Rica", "Uruguay", "Venezuela") & 
+           year >= 1965 & year <= 2015) %>%
+    select(year, country_name, v2x_polyarchy_codehigh) # Seleccionar columnas relevantes
+
+# Crear gráfico de comparación
+ggplot(vdem_filtered, aes(x = year, y = v2x_polyarchy_codehigh, color = country_name)) +
+    geom_line() +
+    geom_point() +
+    labs(title = "Comparación de Polyarchy en Chile, Costa Rica, Uruguay y Venezuela (1965-2015)",
+         x = "Año",
+         y = "Código de Polyarchy") +
+    theme_minimal()
+
+###### GAP Index ########
+
+# Filtrar los datos para los países y años deseados
+vdem_filtered <- vdem_data %>%
+    filter(country_name %in% c("Chile", "Costa Rica", "Uruguay", "Venezuela") & 
+           year >= 1965 & year <= 2015) %>%
+    select(year, country_name, gap_index) # Seleccionar columnas relevantes
+
+ggplot(vdem_filtered, aes(x = year, y = gap_index, color = country_name)) +
+    geom_line() +
+    geom_point() +
+    labs(title = "Comparación del Gap Index en Chile, Costa Rica, Uruguay y Venezuela (1965-2015)",
+         x = "Año",
+         y = "Gap Index") +
+    theme_minimal()
+    
